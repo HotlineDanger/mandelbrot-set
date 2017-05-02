@@ -22,17 +22,22 @@ function Graph(canvasId) {
         return coord;
     }.bind(this);
 
-    this.render = function() {
-        const imageData = context.createImageData(canvas.width, canvas.height);
-        
-        for(let i = 0; i < imageData.data.length; i += 1){
-            imageData[i] = Math.random() * 255;
+    this.render = function(predicate) {
+        for (var i = 0; i < canvas.width * canvas.height * 4; i += 4) {
+            set = predicate(indexToCoord(i)) ? 255 : 0;
+            imageData.data[i]     = 0; // R
+            imageData.data[i + 1] = 0; // G
+            imageData.data[i + 2] = 0; // B
+            imageData.data[i + 3] = set; // Alpha
         }
-
         context.putImageData(imageData, 0, 0);
     }
 }
 
 const graph = new Graph();
+graph.r = 500;
+graph.render(function(coord) {
+    
+});
 
 graph.render();
