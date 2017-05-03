@@ -34,19 +34,5 @@ function Graph(canvasId) {
 var graph = new Graph("can_1");
 graph.r = 500;
 graph.render(function(coord) {
-    return (
-        coord.x == coord.y
-        ||
-        coord.x * 2 == coord.y
-        ||
-        coord.x * 3 == coord.y
-        ||
-        coord.x * 4 == coord.y
-        ||
-        coord.x * 5 == coord.y
-        ||
-        coord.x * 6 == coord.y
-        ||
-        coord.x * 40 == coord.y
-    )
+    return (coord.x > 100 && coord.y > -27);
 });
