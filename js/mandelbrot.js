@@ -1,10 +1,13 @@
-function thinger(z, c, i) {
-    if (i > 10) {
+function thinger(zr, zi, cr, ci, iterations) {
+    if (iterations > 10) {
         return;
     }
-    const next = Math.pow(z, 2) + c;
+    const nextr = (zr * zr) - (zi * zi) + cr;
+    const nexti = ((zr * zi) * 2) + ci;
     console.log(next);
-    return thinger(next, c, i += 1);
+    return thinger(nextr, nexti cr, ci iterations += 1);
 }
 
 thinger(0, -1, 0);
+
+const
