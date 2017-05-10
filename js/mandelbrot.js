@@ -1,11 +1,19 @@
-function thinger(zr, zi, cr, ci, iterations) {
-    if (iterations > 10) {
-        return;
+function thinger(cr, ci) {
+    const zr = cr;
+    const zi = ci;
+   
+    for(let i = 0; i < 100; i += 1) {
+        if(zr ** 2 + zi ** 2 > 4) {
+            return false;
+        }
+
+        newzr = (zr * zr) - (zi * zi) + cr;
+        newzi = ((zr * zi) *2) + ci;
+        zr = newzr;
+        zi = newzi; 
     }
-    const nextr = (zr * zr) - (zi * zi) + cr;
-    const nexti = ((zr * zi) * 2) + ci;
-    console.log(next);
-    return thinger(nextr, nexti cr, ci iterations += 1);
+
+    return true;
 }
 
 thinger(0, -1, 0);
