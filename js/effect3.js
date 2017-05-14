@@ -4,7 +4,7 @@ function Mandelbrot(canvasId, x, y, r) {
     const ctx = canvas.getContext("2d");
     const imageData = ctx.createImageData(canvas.width, canvas.height);
     const aspectRatio = canvas.height / canvas.width
-    // The more iterqtions we do the finer the grqin is in the rendering
+    // The more iterations we do the finer the grqin is in the rendering
     this.iterations = 100;
     this.r = r
     this.center = {
@@ -36,15 +36,17 @@ function Mandelbrot(canvasId, x, y, r) {
             zr = newzr
             zi = newzi
         }
-        return true;
+        return [true, i];
     }.bind(this);
     this.render = function() {
         for (let i = 0; i < canvas.width * canvas.height * 4; i += 4) {
-            set = isMandlebrot(indexToCoord(i)) ? 255 : 0;
-            imageData.data[i]     = 0;
-            imageData.data[i + 1] = 0;
-            imageData.data[i + 2] = 0;
-            imageData.data[i + 3] = set;
+            const thing = isMandlebrot(indexToCoord(i));
+            const set =  thing[0] ?  0 : (thing[1] / this.iterations) * 0xffffff;
+            
+            imageData.data[i]     = (set & 0xff0000) >> 16;
+            imageData.data[i + 1] = (set & 0x00ff00) >> 8;
+            imageData.data[i + 2] = set & 0x0000ff;
+            imageData.data[i + 3] = 255;
         }
         ctx.putImageData(imageData, 0, 0);
     }.bind(this)
